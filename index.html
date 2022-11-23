@@ -129,6 +129,12 @@
             resetButton = document.createElement('button');
             resetButton.textContent = 'Start Guessing Again!';
             document.body.appendChild(resetButton);
+            resetButton.style.padding = "10px";
+            resetButton.style.borderRadius = "100px";
+            resetButton.style.backgroundColor = "cornflowerblue";
+            resetButton.style.color = "white";
+            resetButton.style.fontSize = "15px";
+            resetButton.style.border = "none";
             resetButton.addEventListener('click', resetGame);
         }
 
