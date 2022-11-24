@@ -39,11 +39,72 @@
 
         }
     </style>
+    <style>
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 34px;
+        }
+        
+        .switch input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+        
+        input:checked + .slider {
+          background-color: #2196F3;
+        }
+        
+        input:focus + .slider {
+          box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked + .slider:before {
+
+          transform: translateX(26px);
+        }
+        
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 34px;
+        }
+        
+        .slider.round:before {
+          border-radius: 50%;
+        }
+        </style>
 </head>
 
 <body>
     <header style="border: 2px solid white">
         <h1 style="text-decoration: underline;">Number guessing game</h1>
+      
 
         <p id="gameRule"></p>
 
@@ -55,6 +116,7 @@
 
         <div class="resultParas">
             <p class="guesses"></p>
+            <p class="hint"></p>
             <p class="lastResult"></p>
             <p class="lowOrHi"></p>
         </div>
@@ -65,7 +127,11 @@
             <input id="CRNR" type="number" required>
             <label for="NOT">Enter the number of Turns</label>
             <input id="NOT" type="number" required>
-            <input type="submit" name="" id="applyChanges" value="Apply Changes" onclick="applyChanges()">
+            <!-- <label class="switch"> 
+                <input type="checkbox" id="showHint" >
+                <span class="slider round">Show Hint</span>
+            </label>
+            <input type="submit" name="" id="applyChanges" value="Apply Changes" onclick="applyChanges()"> -->
         </div>
     </header>
     <script>
@@ -76,7 +142,7 @@
         function applyChanges() {
             localStorage.setItem("Noturn", document.querySelector('#NOT').value);
             localStorage.setItem("Norange", document.querySelector('#CRNR').value);
-            document.querySelector('#gameRule').textContent = "We have selected a random number between 1 and " + Number(localStorage.getItem("Norange")) + " See if you can guess it in " + Number(localStorage.getItem("Noturn"))+  "  turns or fewer. We'll tell you if your guess was too high or too low."
+            document.querySelector('#gameRule').textContent = "We have selected a random number between 1 and " + Number(localStorage.getItem("Norange")) + " See if you can guess it in " + Number(localStorage.getItem("Noturn")) + "  turns or fewer. We'll tell you if your guess was too high or too low."
             window.alert('Successfully Applied');
             document.querySelector('#NOT').value = " ";
             document.querySelector('#CRNR').value = " ";
@@ -88,6 +154,7 @@
         const lowOrHi = document.querySelector('.lowOrHi');
         const guessSubmit = document.querySelector('.guessSubmit');
         const guessField = document.querySelector('.guessField');
+        let hint = document.querySelector('.hint');
         let guessCount = 1;
         let resetButton;
 
@@ -111,9 +178,23 @@
             } else {
                 lastResult.textContent = "Wrong!";
                 lastResult.style.color = 'red';
+                if (randomNumber % 2 == 0) {
+                    hint.textContent = "The number is even!"
+                    hint.style.color = 'yellow';
+                } else if (randomNumber % 3 == 0) {
+                    hint.textContent = "The number is divisible by 3!"
+                    hint.style.color = 'yellow';
+                } else if (randomNumber % 5 == 0) {
+                    hint.textContent = "The number is divisible by 5!"
+                    hint.style.color = 'yellow';
+                } else if (randomNumber % 7 == 0) {
+                    hint.textContent = "The number is divisible by 7!"
+                    hint.style.color = 'yellow';
+                }
                 if (userGuess < randomNumber) {
                     lowOrHi.textContent = 'Last guess was too low!';
-                    
+
+
                 } else if (userGuess > randomNumber) {
                     lowOrHi.textContent = 'Last guess was too high!';
                 }
@@ -155,7 +236,7 @@
                 resetPara.textContent = '';
             }
             resetButton.parentNode.removeChild(resetButton);
-           gameAns.parentNode.removeChild(gameAns);
+            gameAns.parentNode.removeChild(gameAns);
             guessField.disabled = false;
             guessSubmit.disabled = false;
             guessField.value = '';
@@ -164,7 +245,15 @@
             randomNumber = Math.floor(Math.random() * Number(localStorage.getItem("Norange"))) + 1;
         }
 
+        // function showhint() {
+        //     if (document.querySelector('#showHint').checked == false) {
+        //         hint.style.display = "none";
+        //     } else {
+        //         hint.style.display = "block";
+        //     }
+        // }
 
+    
 
     </script>
 </body>
