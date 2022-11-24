@@ -113,6 +113,7 @@
                 lastResult.style.color = 'red';
                 if (userGuess < randomNumber) {
                     lowOrHi.textContent = 'Last guess was too low!';
+                    
                 } else if (userGuess > randomNumber) {
                     lowOrHi.textContent = 'Last guess was too high!';
                 }
@@ -136,6 +137,15 @@
             resetButton.style.fontSize = "15px";
             resetButton.style.border = "none";
             resetButton.addEventListener('click', resetGame);
+            gameAns = document.createElement('p');
+            gameAns.textContent = 'Correct Number: ' + randomNumber;
+            document.body.appendChild(gameAns);
+            gameAns.style.padding = "10px";
+            gameAns.style.borderRadius = "100px";
+            gameAns.style.backgroundColor = "green";
+            gameAns.style.color = "white";
+            gameAns.style.fontSize = "15px";
+            gameAns.style.border = "none";
         }
 
         function resetGame() {
@@ -145,6 +155,7 @@
                 resetPara.textContent = '';
             }
             resetButton.parentNode.removeChild(resetButton);
+           gameAns.parentNode.removeChild(gameAns);
             guessField.disabled = false;
             guessSubmit.disabled = false;
             guessField.value = '';
