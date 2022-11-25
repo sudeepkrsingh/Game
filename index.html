@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript"
-        language="javascript"> $(function () { $(this).bind("contextmenu", function (e) { e.preventDefault(); }); }); </script>
+        language="javascript"> $(function () { $(this).bind("contextmenu", function (e) { e.preventDefault(); }); }); </script> -->
     <style>
         body {
             background-color: #0a1014;
@@ -44,7 +44,6 @@
 
         }
 
-        
         #watermarkSks {
             font-size: 300px;
             text-align: center;
@@ -225,9 +224,12 @@
             <input type="submit" name="" id="applyChanges" value="Apply Changes" onclick="applyChanges()">
         </div>
     </header>
+    <div id="watermarkSks">SKS</div>
     <footer>
-        <p>You guessed in <span id="UserGuessedTurns"></span> turns only!</p>
-        <div><p>Leaderboard</p></div>
+        <p>You only guessed in <span id="UserGuessedTurns"></span> turns!</p>
+        <div>
+            <p>Leaderboard</p>
+        </div>
         <p id="user_result"></p>
 
     </footer>
