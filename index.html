@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript"
+        language="javascript"> $(function () { $(this).bind("contextmenu", function (e) { e.preventDefault(); }); }); </script>
     <style>
         body {
             background-color: #0a1014;
@@ -38,75 +43,134 @@
             font-size: 20px;
 
         }
-    </style>
-    <style>
-        .switch {
-          position: relative;
-          display: inline-block;
-          width: 60px;
-          height: 34px;
-        }
-        
-        .switch input { 
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
-        
-        .slider {
-          position: absolute;
-          cursor: pointer;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: #ccc;
-          -webkit-transition: .4s;
-          transition: .4s;
-        }
-        
-        .slider:before {
-          position: absolute;
-          content: "";
-          height: 26px;
-          width: 26px;
-          left: 4px;
-          bottom: 4px;
-          background-color: white;
-          -webkit-transition: .4s;
-          transition: .4s;
-        }
-        
-        input:checked + .slider {
-          background-color: #2196F3;
-        }
-        
-        input:focus + .slider {
-          box-shadow: 0 0 1px #2196F3;
-        }
-        
-        input:checked + .slider:before {
 
-          transform: translateX(26px);
+        /* Media Queries */
+        @media only screen and (max-width: 1200px) {
+
+            div#setting label,
+            div#setting input {
+
+                display: block;
+                margin: auto;
+            }
+
+            p#gameRule {
+                text-align: justify;
+            }
         }
-        
+    </style>
+    <script>
+        document.onkeydown = function (e) {
+            if (e.ctrlKey &&
+                (e.keyCode === 85)) {
+                return false;
+            }
+        };
+    </script>
+    <script>
+        document.onkeydown = function (e) {
+            if (event.keyCode == 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'H'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'A'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'F'.charCodeAt(0)) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode == 'E'.charCodeAt(0)) {
+                return false;
+            }
+        }
+    </script>
+    <!-- <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+
+            transform: translateX(26px);
+        }
+
         /* Rounded sliders */
         .slider.round {
-          border-radius: 34px;
+            border-radius: 34px;
         }
-        
+
         .slider.round:before {
-          border-radius: 50%;
+            border-radius: 50%;
         }
-        </style>
+    </style> -->
 </head>
 
 <body>
     <header style="border: 2px solid white">
-        <h1 style="text-decoration: underline;">Number guessing game</h1>
-      
+        <h1 style="text-decoration: underline;">!!Guess A Number!!</h1>
 
-        <p id="gameRule"></p>
+
+        <p id="gameRule">We have selected a random number between 1 and 100. See if you can guess it in 10 turns or
+            fewer. We'll tell you if your guess was too high or too low.
+        </p>
 
         <div class="form">
             <label for="guessField">Enter a guess: </label>
@@ -118,10 +182,10 @@
             <p class="guesses"></p>
             <p class="hint"></p>
             <p class="lastResult"></p>
-            <p class="lowOrHi"></p>
+            <p class="lowOrHi" style="color: yellow;"></p>
         </div>
 
-        <div>
+        <div id="setting">
             <p style="font-size: 25px; text-decoration: underline">Setting</p>
             <label for="CRNR">Enter the Computer Random Number Range</label>
             <input id="CRNR" type="number" required>
@@ -131,21 +195,31 @@
                 <input type="checkbox" id="showHint" >
                 <span class="slider round">Show Hint</span>
             </label>-->
-            <input type="submit" name="" id="applyChanges" value="Apply Changes" onclick="applyChanges()"> 
+            <input type="submit" name="" id="applyChanges" value="Apply Changes" onclick="applyChanges()">
         </div>
     </header>
+    <footer>
+        <p>You only guessed in <span id="UserGuessedTurns"></span> turns!</p>
+        <div><p>Leaderboard</p></div>
+        <p id="user_result"></p>
+
+    </footer>
     <script>
         // var randomNoRange = document.querySelector('#CRNR').value;
         // var Noturn = document.querySelector('#NOT').value;
 
 
         function applyChanges() {
-            localStorage.setItem("Noturn", document.querySelector('#NOT').value);
-            localStorage.setItem("Norange", document.querySelector('#CRNR').value);
-            document.querySelector('#gameRule').textContent = "We have selected a random number between 1 and " + Number(localStorage.getItem("Norange")) + " See if you can guess it in " + Number(localStorage.getItem("Noturn")) + "  turns or fewer. We'll tell you if your guess was too high or too low."
-            window.alert('Successfully Applied');
-            document.querySelector('#NOT').value = " ";
-            document.querySelector('#CRNR').value = " ";
+            if (Number(document.querySelector('#NOT').value) === 0 || Number(document.querySelector('#CRNR').value) === 0) {
+                alert('Please Provide the both number of turns & system random number range before applying this setting')
+            } else {
+                localStorage.setItem("Noturn", document.querySelector('#NOT').value);
+                localStorage.setItem("Norange", document.querySelector('#CRNR').value);
+                document.querySelector('#gameRule').textContent = "We have selected a random number between 1 and " + Number(localStorage.getItem("Norange")) + " See if you can guess it in " + Number(localStorage.getItem("Noturn")) + "  turns or fewer. We'll tell you if your guess was too high or too low."
+                window.alert('Successfully Applied \nFeel free to guess a number');
+                document.querySelector('#NOT').value = " ";
+                document.querySelector('#CRNR').value = " ";
+            }
         }
 
         let randomNumber = Math.floor(Math.random() * Number(localStorage.getItem("Norange"))) + 1;
@@ -154,54 +228,60 @@
         const lowOrHi = document.querySelector('.lowOrHi');
         const guessSubmit = document.querySelector('.guessSubmit');
         const guessField = document.querySelector('.guessField');
+        let guessTurn = document.querySelector('#UserGuessedTurns');
         let hint = document.querySelector('.hint');
         let guessCount = 1;
         let resetButton;
 
         function checkGuess() {
             const userGuess = Number(guessField.value);
-            if (guessCount === 1) {
-                guesses.textContent = 'Previous guesses: ';
-            }
-            guesses.textContent += userGuess + ' ';
-
-            if (userGuess === randomNumber) {
-                lastResult.textContent = 'Congratulation! You got it right!';
-                lastResult.style.color = 'green';
-                lowOrHi.textContent = ' ';
-                setGameOver();
-
-            } else if (guessCount === Number(localStorage.getItem("Noturn"))) {
-                lastResult.textContent = '!Game Over!';
-                lowOrHi.textContent = '';
-                setGameOver();
+            if (userGuess === 0) {
+                window.alert("Please Guess a Number! \n\nSelect number other than 0!")
             } else {
-                lastResult.textContent = "Wrong!";
-                lastResult.style.color = 'red';
-                if (randomNumber % 2 == 0) {
-                    hint.textContent = "The number is even!"
-                    hint.style.color = 'yellow';
-                } else if (randomNumber % 3 == 0) {
-                    hint.textContent = "The number is divisible by 3!"
-                    hint.style.color = 'yellow';
-                } else if (randomNumber % 5 == 0) {
-                    hint.textContent = "The number is divisible by 5!"
-                    hint.style.color = 'yellow';
-                } else if (randomNumber % 7 == 0) {
-                    hint.textContent = "The number is divisible by 7!"
-                    hint.style.color = 'yellow';
+                if (guessCount === 1) {
+                    guesses.textContent = 'Previous guesses: ';
                 }
-                if (userGuess < randomNumber) {
-                    lowOrHi.textContent = 'Last guess was too low!';
+                guesses.textContent += userGuess + ' ';
+
+                if (userGuess === randomNumber) {
+                    lastResult.textContent = 'Congratulation! You got it right!';
+                    lastResult.style.color = 'green';
+                    lowOrHi.textContent = ' ';
+                    guessTurn.textContent = guessCount;
+                    setGameOver();
+
+                } else if (guessCount === Number(localStorage.getItem("Noturn"))) {
+                    lastResult.textContent = '!Game Over!';
+                    lowOrHi.textContent = '';
+                    setGameOver();
+                } else {
+                    lastResult.textContent = "Wrong!";
+                    lastResult.style.color = 'red';
+                    if (randomNumber % 2 == 0) {
+                        hint.textContent = "The number is even!"
+                        hint.style.color = 'yellow';
+                    } else if (randomNumber % 3 == 0) {
+                        hint.textContent = "The number is divisible by 3!"
+                        hint.style.color = 'yellow';
+                    } else if (randomNumber % 5 == 0) {
+                        hint.textContent = "The number is divisible by 5!"
+                        hint.style.color = 'yellow';
+                    } else if (randomNumber % 7 == 0) {
+                        hint.textContent = "The number is divisible by 7!"
+                        hint.style.color = 'yellow';
+                    }
+                    if (userGuess < randomNumber) {
+                        lowOrHi.textContent = 'Last guess was too low!';
 
 
-                } else if (userGuess > randomNumber) {
-                    lowOrHi.textContent = 'Last guess was too high!';
+                    } else if (userGuess > randomNumber) {
+                        lowOrHi.textContent = 'Last guess was too high!';
+                    }
                 }
+                guessCount++;
+                guessField.value = '';
+                guessField.focus();
             }
-            guessCount++;
-            guessField.value = '';
-            guessField.focus();
         }
         guessSubmit.addEventListener('click', checkGuess);
 
@@ -241,7 +321,7 @@
             guessSubmit.disabled = false;
             guessField.value = '';
             guessField.focus();
-            lastResult.style.backgroundColor = 'cornflowerblue';
+
             randomNumber = Math.floor(Math.random() * Number(localStorage.getItem("Norange"))) + 1;
         }
 
@@ -253,7 +333,7 @@
         //     }
         // }
 
-    
+
 
     </script>
 </body>
